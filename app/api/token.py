@@ -1,13 +1,13 @@
-from fastapi import Request, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-
+from fastapi import Request, HTTPException, status, Header
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials, OAuth2AuthorizationCodeBearer
+from typing import Annotated
 
 class TokenAuthScheme(HTTPBearer):
     def __init__(self, auto_error: bool = True):
         super().__init__(auto_error=auto_error)
 
     async def __call__(self, request: Request) -> HTTPAuthorizationCredentials:
-        credentials: HTTPAuthorizationCredentials = await super().__call__(request)
+        credentials: HTTPAuthorizationCredentials = await super(TokenAuthScheme).__call__(request)
 
         if credentials.scheme.lower() != "token":
             raise HTTPException(
@@ -16,6 +16,12 @@ class TokenAuthScheme(HTTPBearer):
             )
         return credentials
 
+async def verify_token(authorization: Annotated[str | None, Header()]):
+    if not authorization.startswith("TOKEN "):
+        raise HTTPException(status_code=401, detail="Invalid token format")
+    token = authorization.split(" ")[1]
+    # Add your token validation logic here
+    return token
 
 from fastapi import FastAPI, Depends
 

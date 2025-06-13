@@ -31,8 +31,9 @@ auth = APIRouter()
 
 @auth.post("/register")
 async def register(user_data:newUser):
+    user_id = uuid.uuid4()
     return await UserDAO.add(
-        id = uuid.uuid4(),
+        id = user_id,
         name = user_data.name,
         user_role = UserRole.USER,
-        api_key = "key-" + str(uuid.uuid4()))
+        api_key = "key-" + str(user_id))

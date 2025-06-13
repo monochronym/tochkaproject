@@ -3,15 +3,15 @@ from typing import Annotated
 
 from sqlalchemy import func
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncAttrs
-from sqlalchemy.orm import DeclarativeBase, declared_attr, Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, declared_attr, mapped_column
 from uuid import UUID
 
-DB_HOST = 'localhost'
-DB_PORT = '5433'
-DB_NAME = 'postgres'
-DB_USER = 'postgres'
-DB_PASSWORD = 'CasperTo360Flip'
-DATABASE_URL = "postgresql+asyncpg://admin:npg_HDNFxkqEa40d@ep-steep-bar-a4kze9lh-pooler.us-east-1.aws.neon.tech/tochka_database"
+# DB_HOST = 'localhost'
+# DB_PORT = '5433'
+# DB_NAME = 'postgres'
+# DB_USER = 'postgres'
+# DB_PASSWORD = 'CasperTo360Flip'
+DATABASE_URL = "postgresql+asyncpg://postgres:ZBSeOUyvubNSuZJHiUWeIrJexmoRXVLW@yamabiko.proxy.rlwy.net:32741/railway"
 # DATABASE_URL = f'postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 
 engine = create_async_engine(DATABASE_URL)
