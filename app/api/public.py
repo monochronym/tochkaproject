@@ -10,11 +10,11 @@ router = APIRouter(prefix="/public")
 router.include_router(auth)
 
 @router.get("/instrument")
-async def get_list_instruments(authorization: Annotated[str | None, Header()]) -> list[instrument]:
+async def get_list_instruments() -> list[instrument]:
     return await InstrumentDAO.find_all()
 
 @router.get("/transactions/{ticker}")
-async def get_transaction_history(ticker:str) -> list[transaction]:
+async def get_transaction_history(ticker:str, limit=10) -> list[transaction]:
     return await TransactionDAO.find_by_filter(ticker=ticker)
 
 @router.get("/orderbook/{ticker}")

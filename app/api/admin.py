@@ -67,4 +67,5 @@ async def delete_instument(authorization: Annotated[str | None, Header()], ticke
                             detail="Not admin",
                             headers={"Authorization": "TOKEN"})
     await InstrumentDAO.delete(False, ticker=ticker)
+    await TickerDAO.delete(False, ticker=ticker)
     return ok()
